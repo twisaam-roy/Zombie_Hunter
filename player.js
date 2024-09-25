@@ -5,7 +5,8 @@ export default class Player {
   constructor({ app }) {
     this.app = app;
     const playerWidth = 32;
-
+    this.score = 0;
+    this.level = 1;
     let sheet =
       PIXI.Loader.shared.resources["assets/hero_male.json"].spritesheet;
 
@@ -15,11 +16,8 @@ export default class Player {
     this.player = new PIXI.AnimatedSprite(sheet.animations["idle"]);
     this.player.animationSpeed = 0.1;
     this.player.play();
-    //this.player = new PIXI.Sprite(PIXI.Texture.WHITE);
     this.player.anchor.set(0.5, 0.3);
     this.player.position.set(app.screen.width / 2, app.screen.height / 2);
-    //this.player.width = this.player.height = playerWidth;
-    //this.player.tint = 0xea985d;
 
     app.stage.addChild(this.player);
 
@@ -52,6 +50,14 @@ export default class Player {
     return this.player.scale.x;
   }
 
+  getPlayerScore() {
+    return this.score;
+  }
+
+  setPlayerScore(score) {
+    this.score = score;
+  }
+
   // method for chipping away healthbar
   attack() {
     this.health -= 1;
@@ -60,6 +66,24 @@ export default class Player {
     if (this.health <= 0) {
       this.dead = true;
     }
+  }
+
+  updateLevel() {
+    if (this.score >= 100 && this.score < 200) {
+      this.level = 2;
+    }
+    else if (this.score >= 200 && this.score < 300) {
+      this.level = 3;
+    }
+    else if (this.score >= 300 && this.score < 500) {
+      this.level = 4;
+    } else if (this.score >= 500) {
+      this.level = 5;
+    }
+    else {
+      this.level = 1;
+    }
+    return this.level;
   }
 
   get position() {

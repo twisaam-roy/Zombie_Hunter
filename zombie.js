@@ -6,12 +6,21 @@ export default class Zombie {
   constructor({ app, player }) {
     this.app = app;
     this.player = player;
-
-    this.speed = 5; //zombie speed
+    this.level = this.player.level;
+    this.speed = this.level * 2; //zombie speed
     let r = this.randomSpawnPoint();
 
     let zombieName = zombies[Math.floor(Math.random() * zombies.length)]; // one of the zombie names randomly
-    this.speed = zombieName === "quickzee" ? 1 : 0.25;
+    this.zombieName = zombieName;
+    if(zombieName === "quickzee" || zombieName === "dogzee"){
+      this.speed = this.speed * 1;
+    } 
+    else if(zombieName === "tankzee" || zombieName === "copzee"){
+      this.speed = this.speed * 0.75;
+    }
+    else {
+      this.speed = this.speed * 0.5;
+    }
     let sheet =
       PIXI.Loader.shared.resources[`assets/${zombieName}.json`].spritesheet;
 
@@ -52,16 +61,39 @@ export default class Zombie {
   }
 
   kill() {
-    //this.app.stage.removeChild(this.zombie);
     this.audio.currentTime = 0;
     this.audio.play();
     this.zombie.textures = this.die.textures;
     this.zombie.loop = false;
+    switch(this.zombieName) {
+      case 'tankzee':
+        this.player.setPlayerScore(this.player.getPlayerScore() + 2);
+        break;
+      case 'dogzee':
+        this.player.setPlayerScore(this.player.getPlayerScore() + 5);
+        break;
+      case 'femalezee':
+        this.player.setPlayerScore(this.player.getPlayerScore() + 1);
+        break;
+      case 'nursezee':
+        this.player.setPlayerScore(this.player.getPlayerScore() + 1);
+        break;
+      case 'quickzee':
+        this.player.setPlayerScore(this.player.getPlayerScore() + 5);
+        break; 
+      case 'copzee':
+        this.player.setPlayerScore(this.player.getPlayerScore() + 2);
+        break;  
+      default:
+        this.player.setPlayerScore(this.player.getPlayerScore() + 1);
+        break;     
+    }
     this.zombie.onComplete = () =>
-      setTimeout(() => this.app.stage.removeChild(this.zombie), 30000); // remove dead zombie (30s)
+      setTimeout(() => this.app.stage.removeChild(this.zombie), 20000); // remove dead zombie (20s)
     this.zombie.play();
     this.zombie.zIndex = -1; //player infront of dead zombies
     clearInterval(this.interval);
+    return this.player.score;
   }
 
   get position() {

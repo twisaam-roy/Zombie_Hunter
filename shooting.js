@@ -5,10 +5,10 @@ export default class Shooting {
   constructor({ app, player }) {
     this.app = app;
     this.player = player;
-    this.bulletSpeed = 4;
+    this.bulletSpeed = 5;
     this.bullets = [];
     this.bulletRadius = 8;
-    this.maxBulets = 3;
+    this.maxBulets = 5;
     this.audio = new Audio("./assets/shoot.mp3");
   }
 
@@ -44,7 +44,6 @@ export default class Shooting {
     ).multiplyScalar(this.bulletSpeed);
     this.bullets.push(bullet); //push bullet to array of bullets to track each bullet
     this.app.stage.addChild(bullet); // add bullet to our stage so we can see it(firing)
-    console.log(this.bullets.length, this.app.stage.children.length);
   }
 
   set shoot(shooting) {
