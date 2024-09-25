@@ -14,9 +14,7 @@
  ## Getting Started
 - To run the game locally, follow the following steps:
 
-- Clone the repository or download the game source code.
- 
-  git clone https://github.com/Gichbuoy/hordzee-zombie-game.git
+- Clone this repository or download the game source code.
 
 - Open the index.html file in a web browser of your choice.
 
@@ -31,10 +29,8 @@
 
 * Ensure that you have [prerequisites such as Node.js or npm] installed on your machine.
 
-* Clone or download the project repository to your local machine. You can use the following command to clone the repository:
-  - https://github.com/Gichbuoy/hordzee-zombie-game.git
+* Clone or download this project repository to your local machine.
 * Open a terminal or command prompt and navigate to the project directory:
-  - cd hordzee-zombie.git
 * Run the following command to install the project dependencies:
   - [npm install]
 
