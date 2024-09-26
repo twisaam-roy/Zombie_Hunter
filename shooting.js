@@ -5,10 +5,10 @@ export default class Shooting {
   constructor({ app, player }) {
     this.app = app;
     this.player = player;
-    this.bulletSpeed = 4;
+    this.bulletSpeed = 5;
     this.bullets = [];
     this.bulletRadius = 8;
-    this.maxBulets = 3;
+    this.maxBulets = 5;
     this.audio = new Audio("./assets/shoot.mp3");
   }
 
