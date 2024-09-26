@@ -3,8 +3,8 @@ import GameState from "./game-state.js";
 export default class Spawner {
   constructor({ app, create }) {
     this.app = app;
-    const spawnInterval = 300; // in miliseconds
-    this.maxSpawns = 45; // number of zombies spawned
+    const spawnInterval = 500; // in miliseconds
+    this.maxSpawns = 50; // number of zombies spawned
     this.create = create;
     this.spawns = [];
     setInterval(() => this.spawn(), spawnInterval);
